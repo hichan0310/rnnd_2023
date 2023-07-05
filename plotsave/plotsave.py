@@ -1,5 +1,5 @@
 import os
-def savePlot(plot, path,file_name='saved_plot' ,axis=False):
+def savePlot(plot, path, file_name='saved_plot' ,axis=False):
     file_lst = os.listdir(path)
     file_cnt = len(file_lst)
 
