@@ -1,11 +1,21 @@
 import matplotlib.pyplot as plt
-
 import os
-
-def CountDir(dir_path):
-    file_lst = os.listdir(dir_path)
+def savePlot(plot, path, axis=False):
+    file_lst = os.listdir(path)
     file_cnt = len(file_lst)
-    return file_cnt
+
+    plot.title('')
+    plot.xlabel('')
+    plot.ylabel('')
+    if not axis:
+        plot.axis('off')
+
+    if file_cnt == 0:
+        save_path = f'{path}/saved_plot.png'
+    else:
+        save_path = f'{path}/saved_plot({file_cnt}).png'
+
+    plot.savefig(save_path, transparent=True)
 
 
 
@@ -19,12 +29,4 @@ plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
 plt.title('Test Plot')
 
-
-
-# 그래프를 PNG 파일로 저장
-if CountDir("./saved") == 0:
-    save_path = f'./saved/saved_plot.png'
-else:
-    save_path = f'./saved/saved_plot({CountDir("./saved")}).png'
-
-plt.savefig(save_path, transparent=True)
+savePlot(plt, './saved', axis=True)
