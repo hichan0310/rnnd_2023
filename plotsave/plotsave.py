@@ -1,5 +1,5 @@
 import os
-def savePlot(plot, path, axis=False):
+def savePlot(plot, path,file_name='saved_plot' ,axis=False):
     file_lst = os.listdir(path)
     file_cnt = len(file_lst)
 
@@ -10,8 +10,8 @@ def savePlot(plot, path, axis=False):
         plot.axis('off')
 
     if file_cnt == 0:
-        save_path = f'{path}/saved_plot.png'
+        save_path = f'{path}/{file_name}.png'
     else:
-        save_path = f'{path}/saved_plot({file_cnt}).png'
+        save_path = f'{path}/{file_name}({file_cnt}).png'
 
     plot.savefig(save_path, transparent=True)
