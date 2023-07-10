@@ -1,5 +1,7 @@
+import cv2
+
 def binary_filter(image):
-    h, w = image.shape
+    w,h = image.shape
 
     pfilter = 0
 
@@ -8,7 +10,6 @@ def binary_filter(image):
             pfilter += image[x][y]
 
     pfilter //= (h * w)
-    print(pfilter)
 
     if pfilter > 150:
         clahe = cv2.createCLAHE(clipLimit=(pfilter // 11), tileGridSize=(8, 8))
@@ -22,7 +23,6 @@ def binary_filter(image):
 
     filter //= h * w
     filter = filter ** 0.92
-    print(filter)
 
     ret, bin_image = cv2.threshold(image, filter, 255, cv2.THRESH_BINARY)
 
