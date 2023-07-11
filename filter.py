@@ -12,8 +12,9 @@ def binary_filter(image):
     pfilter //= (h * w)
 
     if pfilter > 150:
-        clahe = cv2.createCLAHE(clipLimit=(pfilter // 11), tileGridSize=(8, 8))
+        clahe = cv2.createCLAHE(clipLimit=(pfilter // 8), tileGridSize=(8, 8))
         image = clahe.apply(image)
+
 
     filter = 0
 
@@ -40,5 +41,7 @@ def binary_filter(image):
 
     kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (2, 2))
     dst2 = cv2.morphologyEx(bin_image, cv2.MORPH_CLOSE, kernel, iterations=2)
+
+    dst2 = dst2[0:h - 50, 10:w - 10].copy()
 
     return dst2
