@@ -16,7 +16,7 @@ def regression(x, y, n):
     line_x = lambda t: default_x(t) + add_line_x(t)
     line_y = lambda t: default_y(t) + add_line_y(t)
 
-    e = 1000
+    e = 10000
     lr = 0.01
     for i in range(e):
         cost_x, cost_y = 0, 0

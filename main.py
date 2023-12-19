@@ -32,7 +32,8 @@ for x_ in range(conv_size, 200 + conv_size):
                 movement=1.5
             )
             n = len(result)
-            if n<20:
+            print(n)
+            if n<40:
                 continue
             x = np.array(list(map(lambda a: -a[0], result))) / 10
             y = np.array(list(map(lambda a: a[1], result))) / 10

@@ -22,8 +22,8 @@ def followline(result: list[tuple[int, int]],
                   ] * conv
 
 
-    for _ in range(position[0] - conv_size // 4, position[0] + conv_size // 4 + 1):
-        for __ in range(position[1] - conv_size // 4, position[1] + conv_size // 4 + 1):
+    for _ in range(position[0] - conv_size // 5, position[0] + conv_size // 5 + 1):
+        for __ in range(position[1] - conv_size // 5, position[1] + conv_size // 5 + 1):
             image[_][__] = 0
 
     num, sum = 0, 0
