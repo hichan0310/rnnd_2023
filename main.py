@@ -3,15 +3,17 @@ import numpy as np
 import followLine
 from followLine import followline as follow
 from imgToNumpy import img_array
+from math import sin, cos
+from regression import *
 
-followLine.grad_rate=0.8
+followLine.grad_rate = 0.8
 
 conv_size = 9
 image = img_array("graph.jpg", (200, 200), padding=conv_size)
 
-color=[(i*20, i*20, i*20) for i in range(9)]
+color = [(i * 20, i * 20, i * 20) for i in range(9)]
 
-index=0
+index = 0
 
 for x_ in range(conv_size, 200 + conv_size):
     for y_ in range(conv_size, 200 + conv_size):
@@ -30,8 +32,11 @@ for x_ in range(conv_size, 200 + conv_size):
                 movement=1.5
             )
             n = len(result)
-            x = np.array(list(map(lambda a: a[0], result)))
-            y = np.array(list(map(lambda a: -a[1], result)))
+            if n<20:
+                continue
+            x = np.array(list(map(lambda a: -a[0], result))) / 10
+            y = np.array(list(map(lambda a: a[1], result))) / 10
+            # print(x, y)
 
             # a, b, c, d, e, f, g, h = [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
             # line_x = lambda t: a[0] * t * t * t * t + b[0] * t * t * t + c[0] * t * t + d[0] * t + e[0] + f[
@@ -77,8 +82,14 @@ for x_ in range(conv_size, 200 + conv_size):
             #     # print('.', end='')
             # t = np.array(list(range(n * 100))) / 100 / 20
             # plt.plot(line_x(t), line_y(t))
-            plt.plot(-y,-x, color=color[index])
-            index+=1
+
+
+
+            l_x, l_y=regression(x, y, n)
+            plt.plot(l_y(np.array([i for i in range(0, (n-1)*100)])/100),
+                     l_x(np.array([i for i in range(0, (n-1)*100)])/100))
+            # plt.plot(y, x)
+
 
 plt.title('')
 plt.xlabel('')
